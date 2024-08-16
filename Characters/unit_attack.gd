@@ -6,6 +6,7 @@ class_name UnitAttack
 
 var target_units_list: Array
 var local_target: Unit
+var attack_is_ready: bool = true
 
 func enter():
 	if !unit.target_group.is_node_ready():
@@ -26,8 +27,14 @@ func physics_update(_delta: float):
 		
 		if direction.length() > 15:
 			unit.velocity = direction.normalized() * move_speed
-		else:
+		elif attack_is_ready:
+			attack_is_ready = false
+			$"../../AttackCooldown".start()
 			unit.velocity = Vector2()
-			var damage: int = randi_range(1, 5)
+			var damage: int = randi_range(1, 10)
 			local_target.get_hit(damage)
-			
+			print(str(unit.name) + " gives " + str(damage) + "damage to " + str(local_target.name))
+
+
+func _on_attack_cooldown_timeout() -> void:
+	attack_is_ready = true

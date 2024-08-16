@@ -3,7 +3,7 @@ class_name Unit
 
 
 @export var target_group: Group
-@export var hp: int = 100
+@export var hp: int = 20
 	
 var own_group: Group
 
