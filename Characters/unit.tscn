@@ -1,21 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://jr48v0ifidae"]
+[gd_scene load_steps=8 format=3 uid="uid://jr48v0ifidae"]
 
 [ext_resource type="Texture2D" uid="uid://dwyqustvr28n4" path="res://External/kenney_1-bit-pack/colored-transparent_packed.png" id="1_5s2wt"]
+[ext_resource type="Script" path="res://Characters/unit.gd" id="1_oydjs"]
+[ext_resource type="Script" path="res://Characters/state_machine.gd" id="3_7w107"]
+[ext_resource type="Script" path="res://Characters/unit_attack.gd" id="4_qjsrv"]
+[ext_resource type="Script" path="res://Characters/unit_idle.gd" id="5_gn2gc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lsqis"]
 atlas = ExtResource("1_5s2wt")
-region = Rect2(418, 1, 13, 14)
+region = Rect2(402, 17, 13, 14)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_im2d4"]
-radius = 14.0
-height = 70.0
+radius = 3.0
+height = 14.0
 
 [node name="Unit" type="CharacterBody2D"]
+collision_mask = 7
+script = ExtResource("1_oydjs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2, 0)
-scale = Vector2(5, 5)
+modulate = Color(1.34766e-06, 0.704194, 0.376839, 1)
+position = Vector2(0.5, 0)
 texture = SubResource("AtlasTexture_lsqis")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_im2d4")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_7w107")
+initial_state = NodePath("UnitAttack")
+
+[node name="UnitAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit")]
+script = ExtResource("4_qjsrv")
+unit = NodePath("../..")
+
+[node name="UnitIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit")]
+script = ExtResource("5_gn2gc")
+unit = NodePath("../..")

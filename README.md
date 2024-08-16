@@ -1,4 +1,4 @@
-# Korpus
+# Korpus - GMTK Game Jam 2024
  
 ## License
 

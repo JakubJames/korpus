@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://2n7e6hppqies"]
+
+[ext_resource type="Script" path="res://Characters/unit.gd" id="1_6a025"]
+[ext_resource type="Texture2D" uid="uid://dwyqustvr28n4" path="res://External/kenney_1-bit-pack/colored-transparent_packed.png" id="2_7vy1o"]
+[ext_resource type="Script" path="res://Characters/state_machine.gd" id="3_j032t"]
+[ext_resource type="Script" path="res://Characters/unit_attack.gd" id="4_efbxf"]
+[ext_resource type="Script" path="res://Characters/unit_idle.gd" id="5_gnwlw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsqis"]
+atlas = ExtResource("2_7vy1o")
+region = Rect2(418, 1, 13, 14)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_im2d4"]
+radius = 3.0
+height = 14.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_mask = 7
+script = ExtResource("1_6a025")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, 0)
+texture = SubResource("AtlasTexture_lsqis")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_im2d4")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_j032t")
+initial_state = NodePath("UnitAttack")
+
+[node name="UnitAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit")]
+script = ExtResource("4_efbxf")
+unit = NodePath("../..")
+
+[node name="UnitIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit")]
+script = ExtResource("5_gnwlw")
+unit = NodePath("../..")

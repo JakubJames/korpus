@@ -1,0 +1,33 @@
+extends State
+class_name UnitAttack
+
+@export var unit: Unit
+@export var move_speed := 20.0
+
+var target_units_list: Array
+var local_target: Unit
+
+func enter():
+	if !unit.target_group.is_node_ready():
+		await unit.target_group.ready
+		
+	target_units_list = unit.target_group.units_list
+	local_target = target_units_list[randi()% target_units_list.size()]
+
+
+func physics_update(_delta: float):
+	if target_units_list.size() == 0:
+		Transitioned.emit(self, "UnitIdle")
+	elif !local_target:
+		var target_n: int = randi()% target_units_list.size()
+		local_target = target_units_list[target_n]
+	else:
+		var direction = local_target.global_position - unit.global_position
+		
+		if direction.length() > 15:
+			unit.velocity = direction.normalized() * move_speed
+		else:
+			unit.velocity = Vector2()
+			var damage: int = randi_range(1, 5)
+			local_target.get_hit(damage)
+			
