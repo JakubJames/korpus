@@ -18,17 +18,15 @@ layout_mode = 2
 
 [node name="SimpleUnitButton" parent="UnitsInventoryContainer/HBoxContainer" instance=ExtResource("2_5fbka")]
 layout_mode = 2
-number_of_units = 60
+number_of_units = 10
 
 [node name="ArcheryUnitButton" parent="UnitsInventoryContainer/HBoxContainer" instance=ExtResource("2_5fbka")]
 layout_mode = 2
-number_of_units = 30
-unit_type = 1
+number_of_units = 5
 
 [node name="BigUnitButton" parent="UnitsInventoryContainer/HBoxContainer" instance=ExtResource("2_5fbka")]
 layout_mode = 2
-number_of_units = 10
-unit_type = 2
+number_of_units = 1
 
 [node name="Button" type="Button" parent="."]
 offset_left = 1025.0

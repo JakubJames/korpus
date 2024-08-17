@@ -35,7 +35,7 @@ func physics_update(_delta: float):
 			unit.velocity = Vector2()
 			var damage: int = randi_range(1, 10)
 			local_target.get_hit(damage)
-			print(str(unit.name) + " gives " + str(damage) + "damage to " + str(local_target.name))
+			#print(str(unit.name) + " gives " + str(damage) + "damage to " + str(local_target.name))
 
 
 func _on_attack_cooldown_timeout() -> void:
