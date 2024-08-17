@@ -9,4 +9,5 @@ func _ready() -> void:
 
 
 func kill_and_remove(killed: Unit):
+	#kills and removes unit from group
 	units_list.erase(killed)

@@ -17,8 +17,10 @@ func enter():
 
 
 func physics_update(_delta: float):
+	# when no enemy left, change state to walking around (idle)
 	if target_units_list.size() == 0:
 		Transitioned.emit(self, "UnitIdle")
+	# when target was killed it assigned new targer
 	elif !local_target:
 		var target_n: int = randi()% target_units_list.size()
 		local_target = target_units_list[target_n]

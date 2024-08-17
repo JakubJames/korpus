@@ -20,3 +20,8 @@ func get_hit(damage: int):
 	if hp <= 0:
 		own_group.kill_and_remove(self)
 		queue_free()
+
+
+# it pass clicking start battle button to the korpus and enemies units
+func _on_units_inventory_start_battle() -> void:
+	$StateMachine/UnitFreeze.is_freezed = false

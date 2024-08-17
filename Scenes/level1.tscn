@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://buujtmou20idr"]
+[gd_scene load_steps=6 format=4 uid="uid://buujtmou20idr"]
 
 [ext_resource type="TileSet" uid="uid://cnxvmlfdc2sot" path="res://Terrain/main_tile_set.tres" id="1_k8e36"]
 [ext_resource type="PackedScene" uid="uid://jr48v0ifidae" path="res://Characters/unit.tscn" id="2_bmw2m"]
 [ext_resource type="PackedScene" uid="uid://cdwwulhmnc4im" path="res://Group/group.tscn" id="2_l1t1k"]
 [ext_resource type="PackedScene" uid="uid://2n7e6hppqies" path="res://Characters/enemy.tscn" id="4_pv7ms"]
+[ext_resource type="PackedScene" uid="uid://4n5wc8o887ei" path="res://UI/in_game_ui.tscn" id="5_0c70r"]
 
 [node name="Level1" type="Node2D"]
 
@@ -14,7 +15,7 @@ tile_set = ExtResource("1_k8e36")
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
 position = Vector2(49, -60)
-zoom = Vector2(2, 2)
+zoom = Vector2(1.8, 1.8)
 
 [node name="Korpus" parent="." instance=ExtResource("2_l1t1k")]
 position = Vector2(34, -37)
@@ -25,22 +26,7 @@ motion_mode = 1
 target_group = NodePath("../../Enemies")
 
 [node name="Unit2" parent="Korpus" node_paths=PackedStringArray("target_group") instance=ExtResource("2_bmw2m")]
-position = Vector2(-27, -16.78)
-motion_mode = 1
-target_group = NodePath("../../Enemies")
-
-[node name="Unit3" parent="Korpus" node_paths=PackedStringArray("target_group") instance=ExtResource("2_bmw2m")]
-position = Vector2(33, -10)
-motion_mode = 1
-target_group = NodePath("../../Enemies")
-
-[node name="Unit4" parent="Korpus" node_paths=PackedStringArray("target_group") instance=ExtResource("2_bmw2m")]
-position = Vector2(34, 101)
-motion_mode = 1
-target_group = NodePath("../../Enemies")
-
-[node name="Unit5" parent="Korpus" node_paths=PackedStringArray("target_group") instance=ExtResource("2_bmw2m")]
-position = Vector2(17, 23)
+position = Vector2(27, -1)
 motion_mode = 1
 target_group = NodePath("../../Enemies")
 
@@ -66,3 +52,7 @@ target_group = NodePath("../../Korpus")
 [node name="Enemy5" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("4_pv7ms")]
 position = Vector2(-50, 17)
 target_group = NodePath("../../Korpus")
+
+[node name="UnitsInventory" parent="." node_paths=PackedStringArray("korpus", "enemies") instance=ExtResource("5_0c70r")]
+korpus = NodePath("../Korpus")
+enemies = NodePath("../Enemies")
