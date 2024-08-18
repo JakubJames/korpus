@@ -6,11 +6,13 @@ signal start_battle
 @export var korpus: Group
 @export var enemies: Group
 @export var spawn_area: Area2D
+@export var disaster_countdown: Timer
 
 var hold_unit: Unit
 var spawned_unit: Unit
 var mouse_inside_spawn: bool = false
 var battle_started: bool = false
+var dialogues: DialogueResource = load("res://Dialogue/main.dialogue")
 
 
 func _process(_delta: float) -> void:
@@ -39,14 +41,10 @@ func _on_button_pressed() -> void:
 
 			if korpus.units_list.size() >= 10:
 				if  GlobalVars.first_dialogue_used and !GlobalVars.second_dialogue_used:
-					DialogueManager.show_example_dialogue_balloon(
-						load("res://Dialogue/main.dialogue"), "disaster"
-					)
+					DialogueManager.show_dialogue_balloon(dialogues, "disaster")
 					GlobalVars.second_dialogue_used=true
 				if !GlobalVars.first_dialogue_used:
-					DialogueManager.show_example_dialogue_balloon(
-						load("res://Dialogue/main.dialogue"), "warning_for_the_player"
-					)
+					DialogueManager.show_dialogue_balloon(dialogues, "warning_for_the_player")
 					GlobalVars.first_dialogue_used = true
 
 			# connect start_battle signal to all units
@@ -59,6 +57,9 @@ func _on_button_pressed() -> void:
 			$UnitsInventoryContainer.hide()
 			$Button.text = 'STOP BATTLE'
 			spawn_area.visible = false
+			# check if disaster is connected
+			if disaster_countdown:
+				disaster_countdown.start()
 			battle_started = true
 
 

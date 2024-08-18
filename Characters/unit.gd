@@ -8,6 +8,7 @@ enum UnitTypes {SIMPLE, ARCHER, BIG, GOD}
 @export var damage_factor: int
 @export var move_speed: int
 @export var unit_type: UnitTypes
+@export var fire_effect: Sprite2D
 	
 var own_group: Group
 var area_occupied: bool = false
@@ -38,3 +39,7 @@ func _on_check_occupation_body_entered(_body: Node2D) -> void:
 
 func _on_check_occupation_body_exited(_body: Node2D) -> void:
 	area_occupied = false
+
+func fire_up():
+	if fire_effect:
+		fire_effect.visible = true

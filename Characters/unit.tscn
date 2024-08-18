@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://jr48v0ifidae"]
+[gd_scene load_steps=11 format=3 uid="uid://jr48v0ifidae"]
 
 [ext_resource type="Texture2D" uid="uid://dwyqustvr28n4" path="res://External/kenney_1-bit-pack/colored-transparent_packed.png" id="1_5s2wt"]
 [ext_resource type="Script" path="res://Characters/unit.gd" id="1_oydjs"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Characters/unit_attack.gd" id="4_qjsrv"]
 [ext_resource type="Script" path="res://Characters/unit_idle.gd" id="5_gn2gc"]
 [ext_resource type="Script" path="res://Characters/unit_freeze.gd" id="6_oswjv"]
+[ext_resource type="PackedScene" uid="uid://c1b2gdhh53yjy" path="res://Shaders/fire_effect.tscn" id="7_c4mql"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lsqis"]
 atlas = ExtResource("1_5s2wt")
@@ -16,14 +17,15 @@ radius = 3.0
 height = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_byt0y"]
-radius = 9.0
+radius = 8.0
 
-[node name="Unit" type="CharacterBody2D"]
+[node name="Unit" type="CharacterBody2D" node_paths=PackedStringArray("fire_effect")]
 collision_mask = 7
 script = ExtResource("1_oydjs")
 hp = 25
 damage_factor = 25
 move_speed = 20
+fire_effect = NodePath("FireEffect")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1.34766e-06, 0.704194, 0.376839, 1)
@@ -56,6 +58,10 @@ position = Vector2(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckOccupation"]
 shape = SubResource("CircleShape2D_byt0y")
+
+[node name="FireEffect" parent="." instance=ExtResource("7_c4mql")]
+visible = false
+position = Vector2(0, 2)
 
 [connection signal="timeout" from="AttackCooldown" to="StateMachine/UnitAttack" method="_on_attack_cooldown_timeout"]
 [connection signal="body_entered" from="CheckOccupation" to="." method="_on_check_occupation_body_entered"]

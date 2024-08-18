@@ -1,0 +1,19 @@
+[gd_scene load_steps=8 format=3 uid="uid://c1b2gdhh53yjy"]
+
+[ext_resource type="Shader" path="res://Shaders/fire.gdshader" id="1_r763o"]
+[ext_resource type="Texture2D" uid="uid://dwj1vlqrh0t28" path="res://Shaders/gradient color fire final.jpg" id="2_pqvae"]
+[ext_resource type="Texture2D" uid="uid://cmtl3hevv56cu" path="res://External/ShaderNoise/melt 2 - 256x256.png" id="3_pbs26"]
+[ext_resource type="Texture2D" uid="uid://dwrokt80ui5n8" path="res://External/ShaderNoise/manifold 8 - 256x256.png" id="4_0lyxm"]
+[ext_resource type="Texture2D" uid="uid://c7rvhcmj1npfo" path="res://External/ShaderNoise/manifold 14 - 128x128.png" id="5_kuuo3"]
+[ext_resource type="Texture2D" uid="uid://s2cpfmx3nst2" path="res://Shaders/sprite for fire.png" id="6_r2pxn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjpba"]
+shader = ExtResource("1_r763o")
+shader_parameter/flame1_texture = ExtResource("3_pbs26")
+shader_parameter/flame2_texture = ExtResource("4_0lyxm")
+shader_parameter/flame3_texture = ExtResource("5_kuuo3")
+shader_parameter/color_gradient = ExtResource("2_pqvae")
+
+[node name="FireEffect" type="Sprite2D"]
+material = SubResource("ShaderMaterial_hjpba")
+texture = ExtResource("6_r2pxn")

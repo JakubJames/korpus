@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bth057km3bul6"]
+[gd_scene load_steps=11 format=4 uid="uid://bth057km3bul6"]
 
 [ext_resource type="TileSet" uid="uid://cnxvmlfdc2sot" path="res://Terrain/main_tile_set.tres" id="1_6kxl1"]
 [ext_resource type="Shader" path="res://Terrain/spawn_area.gdshader" id="2_1lp44"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://de5bi0u5764ku" path="res://Characters/big_enemy.tscn" id="5_nkk42"]
 [ext_resource type="PackedScene" uid="uid://4n5wc8o887ei" path="res://UI/in_game_ui.tscn" id="6_lsuo3"]
 [ext_resource type="PackedScene" uid="uid://udufj0ob006w" path="res://UI/win_lose_ui.tscn" id="7_nqcqp"]
+[ext_resource type="AudioStream" uid="uid://cxn6qrrd2plju" path="res://External/Sounds/cave.wav" id="8_re2rh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dit4q"]
 radius = 21.575
@@ -63,6 +64,10 @@ korpus = NodePath("../Korpus")
 enemies = NodePath("../Enemies")
 in_game_ui = NodePath("../InGameUI")
 next_level_name = "level3"
+
+[node name="CaveSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_re2rh")
+autoplay = true
 
 [connection signal="mouse_entered" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_entered"]
 [connection signal="mouse_exited" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_exited"]

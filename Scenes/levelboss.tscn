@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=4 uid="uid://cspnda1la67v7"]
+[gd_scene load_steps=12 format=4 uid="uid://cspnda1la67v7"]
 
+[ext_resource type="Script" path="res://Scenes/disable_dialogs.gd" id="1_qtgg5"]
 [ext_resource type="TileSet" uid="uid://cnxvmlfdc2sot" path="res://Terrain/main_tile_set.tres" id="1_ssv54"]
 [ext_resource type="Shader" path="res://Terrain/spawn_area.gdshader" id="2_kesya"]
 [ext_resource type="Texture2D" uid="uid://kpr3qpyrb52p" path="res://Terrain/spawn_orb.png" id="3_c7dq2"]
 [ext_resource type="PackedScene" uid="uid://cdwwulhmnc4im" path="res://Group/group.tscn" id="4_41hvm"]
 [ext_resource type="PackedScene" uid="uid://cwcaj1r1rxslj" path="res://Characters/god.tscn" id="5_pd30v"]
 [ext_resource type="PackedScene" uid="uid://4n5wc8o887ei" path="res://UI/in_game_ui.tscn" id="7_6mfxh"]
+[ext_resource type="AudioStream" uid="uid://dnc85ejak7ceb" path="res://External/Sounds/horror-death-ambiance-1.wav" id="8_lq20p"]
 [ext_resource type="PackedScene" uid="uid://udufj0ob006w" path="res://UI/win_lose_ui.tscn" id="8_yemtl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65o37"]
@@ -20,6 +22,7 @@ shader_parameter/highlight_speed = 6.0
 shader_parameter/highlight_width = 15.0
 
 [node name="LevelBoss" type="Node2D"]
+script = ExtResource("1_qtgg5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(49, -60)
@@ -64,6 +67,10 @@ korpus = NodePath("../Korpus")
 enemies = NodePath("../Enemies")
 in_game_ui = NodePath("../InGameUI")
 next_level_name = "the_end"
+
+[node name="GodSounds" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_lq20p")
+autoplay = true
 
 [connection signal="mouse_entered" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_entered"]
 [connection signal="mouse_exited" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_exited"]

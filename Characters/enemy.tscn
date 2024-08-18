@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://2n7e6hppqies"]
+[gd_scene load_steps=10 format=3 uid="uid://2n7e6hppqies"]
 
 [ext_resource type="Script" path="res://Characters/unit.gd" id="1_6a025"]
 [ext_resource type="Texture2D" uid="uid://dwyqustvr28n4" path="res://External/kenney_1-bit-pack/colored-transparent_packed.png" id="2_7vy1o"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Characters/unit_attack.gd" id="4_efbxf"]
 [ext_resource type="Script" path="res://Characters/unit_idle.gd" id="5_gnwlw"]
 [ext_resource type="Script" path="res://Characters/unit_freeze.gd" id="6_adv2k"]
+[ext_resource type="PackedScene" uid="uid://c1b2gdhh53yjy" path="res://Shaders/fire_effect.tscn" id="7_igr82"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lsqis"]
 atlas = ExtResource("2_7vy1o")
@@ -15,18 +16,20 @@ region = Rect2(418, 1, 13, 14)
 radius = 3.0
 height = 14.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("fire_effect")]
 collision_mask = 7
 script = ExtResource("1_6a025")
 hp = 25
 damage_factor = 25
 move_speed = 20
+fire_effect = NodePath("FireEffect")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0.5, 0)
 texture = SubResource("AtlasTexture_lsqis")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_im2d4")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -46,5 +49,8 @@ script = ExtResource("6_adv2k")
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="FireEffect" parent="." instance=ExtResource("7_igr82")]
+position = Vector2(0, 2)
 
 [connection signal="timeout" from="AttackCooldown" to="StateMachine/UnitAttack" method="_on_attack_cooldown_timeout"]

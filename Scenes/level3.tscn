@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dgqcnunbopv4n"]
+[gd_scene load_steps=14 format=4 uid="uid://dgqcnunbopv4n"]
 
 [ext_resource type="TileSet" uid="uid://cnxvmlfdc2sot" path="res://Terrain/main_tile_set.tres" id="1_40jce"]
 [ext_resource type="Shader" path="res://Terrain/spawn_area.gdshader" id="2_gtg6f"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://4n5wc8o887ei" path="res://UI/in_game_ui.tscn" id="6_0vaq6"]
 [ext_resource type="PackedScene" uid="uid://de5bi0u5764ku" path="res://Characters/big_enemy.tscn" id="6_p02bo"]
 [ext_resource type="PackedScene" uid="uid://udufj0ob006w" path="res://UI/win_lose_ui.tscn" id="8_x8tgh"]
+[ext_resource type="Script" path="res://Scenes/disaster_countdown.gd" id="9_v7ncn"]
+[ext_resource type="AudioStream" uid="uid://dakfl6sj0ag2g" path="res://External/Sounds/suonho_scaryscape_01.wav" id="10_w71ph"]
+[ext_resource type="AudioStream" uid="uid://cxn6qrrd2plju" path="res://External/Sounds/cave.wav" id="11_fvtmy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65o37"]
 radius = 72.0
@@ -110,10 +113,11 @@ target_group = NodePath("../../Korpus")
 position = Vector2(-68, 3)
 target_group = NodePath("../../Korpus")
 
-[node name="InGameUI" parent="." node_paths=PackedStringArray("korpus", "enemies", "spawn_area") instance=ExtResource("6_0vaq6")]
+[node name="InGameUI" parent="." node_paths=PackedStringArray("korpus", "enemies", "spawn_area", "disaster_countdown") instance=ExtResource("6_0vaq6")]
 korpus = NodePath("../Korpus")
 enemies = NodePath("../Enemies")
 spawn_area = NodePath("../SpawnArea")
+disaster_countdown = NodePath("../DisasterCountdown")
 
 [node name="Win-LoseUI" parent="." node_paths=PackedStringArray("korpus", "enemies", "in_game_ui") instance=ExtResource("8_x8tgh")]
 visible = false
@@ -122,5 +126,27 @@ enemies = NodePath("../Enemies")
 in_game_ui = NodePath("../InGameUI")
 next_level_name = "levelboss"
 
+[node name="DisasterCountdown" type="Timer" parent="." node_paths=PackedStringArray("korpus", "enemies")]
+wait_time = 5.0
+one_shot = true
+script = ExtResource("9_v7ncn")
+korpus = NodePath("../Korpus")
+enemies = NodePath("../Enemies")
+
+[node name="BurningInterval" type="Timer" parent="DisasterCountdown"]
+
+[node name="Suspense" type="Timer" parent="DisasterCountdown"]
+wait_time = 5.0
+
+[node name="DisasterAmbient" type="AudioStreamPlayer" parent="DisasterCountdown"]
+stream = ExtResource("10_w71ph")
+
+[node name="CaveSounds" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_fvtmy")
+autoplay = true
+
 [connection signal="mouse_entered" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_entered"]
 [connection signal="mouse_exited" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_exited"]
+[connection signal="timeout" from="DisasterCountdown" to="DisasterCountdown" method="_on_timeout"]
+[connection signal="timeout" from="DisasterCountdown/BurningInterval" to="DisasterCountdown" method="_on_burning_interval_timeout"]
+[connection signal="timeout" from="DisasterCountdown/Suspense" to="DisasterCountdown" method="_on_suspense_timeout"]
