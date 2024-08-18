@@ -1,26 +1,25 @@
-[gd_scene load_steps=11 format=4 uid="uid://dgqcnunbopv4n"]
+[gd_scene load_steps=10 format=4 uid="uid://cspnda1la67v7"]
 
-[ext_resource type="TileSet" uid="uid://cnxvmlfdc2sot" path="res://Terrain/main_tile_set.tres" id="1_40jce"]
-[ext_resource type="Shader" path="res://Terrain/spawn_area.gdshader" id="2_gtg6f"]
-[ext_resource type="Texture2D" uid="uid://kpr3qpyrb52p" path="res://Terrain/spawn_orb.png" id="3_mii6t"]
-[ext_resource type="PackedScene" uid="uid://cdwwulhmnc4im" path="res://Group/group.tscn" id="4_ujdpe"]
-[ext_resource type="PackedScene" uid="uid://2n7e6hppqies" path="res://Characters/enemy.tscn" id="5_h7mrn"]
-[ext_resource type="PackedScene" uid="uid://4n5wc8o887ei" path="res://UI/in_game_ui.tscn" id="6_0vaq6"]
-[ext_resource type="PackedScene" uid="uid://de5bi0u5764ku" path="res://Characters/big_enemy.tscn" id="6_p02bo"]
-[ext_resource type="PackedScene" uid="uid://udufj0ob006w" path="res://UI/win_lose_ui.tscn" id="8_x8tgh"]
+[ext_resource type="TileSet" uid="uid://cnxvmlfdc2sot" path="res://Terrain/main_tile_set.tres" id="1_ssv54"]
+[ext_resource type="Shader" path="res://Terrain/spawn_area.gdshader" id="2_kesya"]
+[ext_resource type="Texture2D" uid="uid://kpr3qpyrb52p" path="res://Terrain/spawn_orb.png" id="3_c7dq2"]
+[ext_resource type="PackedScene" uid="uid://cdwwulhmnc4im" path="res://Group/group.tscn" id="4_41hvm"]
+[ext_resource type="PackedScene" uid="uid://cwcaj1r1rxslj" path="res://Characters/god.tscn" id="5_pd30v"]
+[ext_resource type="PackedScene" uid="uid://4n5wc8o887ei" path="res://UI/in_game_ui.tscn" id="7_6mfxh"]
+[ext_resource type="PackedScene" uid="uid://udufj0ob006w" path="res://UI/win_lose_ui.tscn" id="8_yemtl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65o37"]
 radius = 72.0
 height = 288.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4aky"]
-shader = ExtResource("2_gtg6f")
+shader = ExtResource("2_kesya")
 shader_parameter/highlight_color = Color(1, 1, 1, 1)
 shader_parameter/frequency = 0.35
 shader_parameter/highlight_speed = 6.0
 shader_parameter/highlight_width = 15.0
 
-[node name="Level3" type="Node2D"]
+[node name="LevelBoss" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(49, -60)
@@ -28,7 +27,7 @@ zoom = Vector2(1.8, 1.8)
 
 [node name="Background" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAABAAEAAAAAAAUAAAABAAAAAAAAAAUAAAABAP//AAAAAAUAAAABAP7/AAAAAAUAAAABAP3/AAAAAAUAAAABAPz/AAAAAAUAAAABAPv/AAAAAAUAAAABAPr/AAAAAAUAAAABAPn/AAAAAAUAAAAFAP7/AAARAAEAAAAAAPn/AAAQAAAAAAAAAPr/AAAQAAAAAAAAAPv/AAAQAAAAAAAAAPz/AAAQAAAAAAAAAP3/AAAQAAAAAAAAAP7/AAAQAAAAAAAAAP//AAAQAAAAAAAAAAAAAAAQAAAAAAAAAAEAAAAQAAAAAAACAPn/AAAQAAAAAAACAPr/AAAQAAAAAAACAPv/AAAQAAAAAAACAPz/AAAQAAAAAAACAP3/AAAQAAAAAAACAP7/AAAQAAAAAAACAP//AAAQAAAAAAACAAAAAAAQAAAAAAACAAEAAAAQAAAAAAABAPj/AAAAAAUAAAABAPf/AAAAAAUAAAABAPb/AAAAAAUAAAAAAPj/AAARAAAAAAAAAPf/AAAQAAAAAAAAAPb/AAAQAAAAAAACAPj/AAAQAAAAAAACAPf/AAAQAAAAAAACAPb/AAAQAAAAAAD6//7/AAAUAAIAAAD5//7/AAATAAIAAAD4////AAAUAAIAAAACAPH/AAATAAIAAAADAPH/AAATAAIAAAAEAPH/AAAIABEAAAAFAPH/AAATAAIAAAAGAPH/AAATAAIAAAABAPH/AAATAAIAAAAAAPH/AAATAAIAAAABAPX/AAABAAUAAAAEAPX/AAABAAUAADACAPX/AAAAAAUAAFADAPX/AAAAAAUAAFAEAPT/AAAAAAUAAAAEAPP/AAAAAAUAAAAEAPL/AAAAAAUAAAAAAPX/AAAQAAAAAAAAAPT/AAAQAAAAAAABAPT/AAAQAAAAAAACAPT/AAAQAAAAAAADAPT/AAAQAAAAAAADAPP/AAAQAAAAAAADAPL/AAAQAAAAAAADAPb/AAAQAAAAAAAEAPb/AAAQAAAAAAAFAPb/AAAQAAAAAAAFAPX/AAAQAAAAAAAFAPT/AAAQAAAAAAAFAPP/AAAQAAAAAAAFAPL/AAAQAAAAAAASAAEAAAASAAIAAAD6//3/AAAUAAEAAAD6//z/AAAUAAEAAAD6//v/AAAUAAEAAAD6//r/AAAUAAEAAAD6//n/AAAUAAEAAAD6//j/AAAUAAEAAAD6//f/AAAUAAEAAAD6//b/AAAUAAEAAAD6//X/AAAUAAEAAAD6//T/AAAUAAEAAAD7//T/AAAUAAIAAAD8//P/AAAUAAIAAAD9//L/AAATAAIAAAD+//L/AAAUAAIAAAD///H/AAATAAIAAAAKAPL/AAASAAEAAAAKAPP/AAASAAIAAAALAPT/AAASAAEAAAALAPX/AAASAAIAAAAMAPf/AAASAAIAAAANAPj/AAASAAEAAAANAPn/AAASAAIAAAAOAPr/AAASAAEAAAAOAPv/AAASAAIAAAAPAPz/AAASAAEAAAAPAP3/AAASAAIAAAAQAP7/AAASAAEAAAAQAP//AAASAAIAAAARAAAAAAASAAIAAAAIAPr/AAAIAAUAAAAJAPr/AAAIAAUAAAAKAPr/AAAIAAUAAAALAPv/AAAJAAUAADALAPz/AAAJAAUAADAKAP3/AAAIAAUAAAAKAPz/AAAIAAUAAAAJAPz/AAAGAAAAAAAJAPv/AAAEAAIAAAAIAPv/AAAIAAUAAAAKAPv/AAAIAAUAAAAIAPz/AAAGAAAAAAAIAP3/AAAIAAUAAAAJAP3/AAAIAAUAAAAKAP7/AAAKAAUAADAJAP7/AAAIAAUAAAALAPr/AAAKAAUAAFAIAP7/AAAIAAUAAAAHAP7/AAAKAAUAAGAHAP3/AAAJAAUAAAAHAPz/AAAJAAUAAAAHAPv/AAAJAAUAAAAHAPr/AAAJAAUAAAAIAPn/AAAJAAUAAFAHAPn/AAAKAAUAAAAKAPn/AAAKAAUAAFALAP3/AAAKAAUAADAJAP//AAAKAAUAADAIAP//AAAKAAUAAGAJAPn/AAAJAAUAAFAHAPH/AAATAAIAAAAIAPH/AAATAAIAAAAJAPH/AAATAAIAAAAMAPb/AAASAAEAAAATAAIAAAASAAIAAAAUAAMAAAASAAIAAAAVAAQAAAASAAIAAAAWAAUAAAASAAIAAAAXAAYAAAASAAIAAAAXAAcAAAASAAIAAAAYAAcAAAASAAIAAAAYAAgAAAASAAIAAAAZAAgAAAASAAIAAAAZAAkAAAASAAIAAAAaAAkAAAASAAIAAAAaAAoAAAASAAIAAAAbAAoAAAASAAIAAAAbAAsAAAASAAIAAAAcAAsAAAASAAIAAAD3/wAAAAAUAAIAAAD2/wAAAAATAAIAAAD1/wAAAAATAAIAAAD0/wAAAAATAAIAAADz/wAAAAATAAIAAADy/wAAAAATAAIAAADx/wAAAAATAAIAAADw/wAAAAATAAIAAADv/wAAAAATAAIAAADu/wAAAAATAAIAAADt/wAAAAATAAIAAADs/wAAAAATAAIAAAAAAAIAAAAQAAAAAAAAAAMAAAAQAAAAAAAAAAQAAAAQAAAAAAAAAAUAAAAQAAAAAAAAAAYAAAAQAAAAAAAAAAcAAAAQAAAAAAAAAAgAAAAQAAAAAAAAAAkAAAAQAAAAAAACAAIAAAAQAAAAAAACAAMAAAAQAAAAAAACAAQAAAAQAAAAAAACAAUAAAAQAAAAAAACAAYAAAAQAAAAAAACAAcAAAAQAAAAAAACAAgAAAAQAAAAAAACAAkAAAAQAAAAAAACAAoAAAAQAAAAAAACAAsAAAAQAAAAAAAAAAoAAAAQAAAAAAAAAAsAAAAQAAAAAAABAAIAAAAAAAUAAAABAAMAAAAAAAUAAAABAAQAAAAAAAUAAAABAAUAAAAAAAUAAAABAAYAAAAAAAUAAAABAAcAAAAAAAUAAAABAAgAAAAAAAUAAAABAAkAAAAAAAUAAAABAAoAAAAAAAUAAAABAAsAAAAAAAUAAAA=")
-tile_set = ExtResource("1_40jce")
+tile_set = ExtResource("1_ssv54")
 
 [node name="SpawnArea" type="Area2D" parent="."]
 position = Vector2(57.77, 46.9)
@@ -41,86 +40,30 @@ shape = SubResource("CapsuleShape2D_65o37")
 material = SubResource("ShaderMaterial_s4aky")
 position = Vector2(13.73, 1.60001)
 scale = Vector2(2.90152, 1.51587)
-texture = ExtResource("3_mii6t")
+texture = ExtResource("3_c7dq2")
 
-[node name="Korpus" parent="." instance=ExtResource("4_ujdpe")]
+[node name="Korpus" parent="." instance=ExtResource("4_41hvm")]
 position = Vector2(34, -37)
 
-[node name="Enemies" parent="." instance=ExtResource("4_ujdpe")]
+[node name="Enemies" parent="." instance=ExtResource("4_41hvm")]
 position = Vector2(74, -203)
 group_type = 1
 
-[node name="Enemy" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_h7mrn")]
-position = Vector2(-2, 3)
+[node name="God" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_pd30v")]
+position = Vector2(49, 38)
 target_group = NodePath("../../Korpus")
 
-[node name="Enemy2" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_h7mrn")]
-position = Vector2(24, 22)
-target_group = NodePath("../../Korpus")
-
-[node name="Enemy3" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_h7mrn")]
-position = Vector2(-27, -8)
-target_group = NodePath("../../Korpus")
-
-[node name="Enemy4" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_h7mrn")]
-position = Vector2(28, -6)
-target_group = NodePath("../../Korpus")
-
-[node name="Enemy5" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_h7mrn")]
-position = Vector2(-50, 17)
-target_group = NodePath("../../Korpus")
-
-[node name="BigEnemy" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("6_p02bo")]
-position = Vector2(-82, 56)
-target_group = NodePath("../../Korpus")
-
-[node name="BigEnemy2" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("6_p02bo")]
-position = Vector2(10, 65)
-target_group = NodePath("../../Korpus")
-
-[node name="BigEnemy3" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("6_p02bo")]
-position = Vector2(45, 67)
-target_group = NodePath("../../Korpus")
-
-[node name="BigEnemy4" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("6_p02bo")]
-position = Vector2(-32, 64)
-target_group = NodePath("../../Korpus")
-
-[node name="Enemy6" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_h7mrn")]
-position = Vector2(-87, 28)
-target_group = NodePath("../../Korpus")
-
-[node name="Enemy7" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_h7mrn")]
-position = Vector2(-48, 0)
-target_group = NodePath("../../Korpus")
-
-[node name="Enemy8" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_h7mrn")]
-position = Vector2(60, 45)
-target_group = NodePath("../../Korpus")
-
-[node name="Enemy9" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_h7mrn")]
-position = Vector2(59, 9)
-target_group = NodePath("../../Korpus")
-
-[node name="Enemy10" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_h7mrn")]
-position = Vector2(-11, 30)
-target_group = NodePath("../../Korpus")
-
-[node name="Enemy11" parent="Enemies" node_paths=PackedStringArray("target_group") instance=ExtResource("5_h7mrn")]
-position = Vector2(-68, 3)
-target_group = NodePath("../../Korpus")
-
-[node name="InGameUI" parent="." node_paths=PackedStringArray("korpus", "enemies", "spawn_area") instance=ExtResource("6_0vaq6")]
+[node name="InGameUI" parent="." node_paths=PackedStringArray("korpus", "enemies", "spawn_area") instance=ExtResource("7_6mfxh")]
 korpus = NodePath("../Korpus")
 enemies = NodePath("../Enemies")
 spawn_area = NodePath("../SpawnArea")
 
-[node name="Win-LoseUI" parent="." node_paths=PackedStringArray("korpus", "enemies", "in_game_ui") instance=ExtResource("8_x8tgh")]
+[node name="Win-LoseUI" parent="." node_paths=PackedStringArray("korpus", "enemies", "in_game_ui") instance=ExtResource("8_yemtl")]
 visible = false
 korpus = NodePath("../Korpus")
 enemies = NodePath("../Enemies")
 in_game_ui = NodePath("../InGameUI")
-next_level_name = "levelboss"
+next_level_name = "the_end"
 
 [connection signal="mouse_entered" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_entered"]
 [connection signal="mouse_exited" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_exited"]

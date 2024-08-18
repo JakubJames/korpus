@@ -21,7 +21,9 @@ radius = 9.0
 [node name="Unit" type="CharacterBody2D"]
 collision_mask = 7
 script = ExtResource("1_oydjs")
+hp = 25
 damage_factor = 25
+move_speed = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1.34766e-06, 0.704194, 0.376839, 1)

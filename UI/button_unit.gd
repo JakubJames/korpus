@@ -23,12 +23,3 @@ func decrease_number_of_units() -> void:
 	
 func enough_quantity() -> bool:
 	return number_of_units > 0
-
-
-func _on_in_game_ui_update_global_vars() -> void:
-	if unit_type == Unit.UnitTypes.SIMPLE:
-		GlobalVars.simple_unit_num = number_of_units
-	elif unit_type == Unit.UnitTypes.ARCHER:
-		GlobalVars.archery_unit_num = number_of_units
-	elif unit_type == Unit.UnitTypes.BIG:
-		GlobalVars.big_unit_num = number_of_units

@@ -1,15 +1,15 @@
 extends CharacterBody2D
 class_name Unit
 
-enum UnitTypes {SIMPLE, ARCHER, BIG}
+enum UnitTypes {SIMPLE, ARCHER, BIG, GOD}
 
 @export var target_group: Group
-@export var hp: int = 20
-@export var damage_factor: int = 10
-@export var move_speed: int = 20
+@export var hp: int
+@export var damage_factor: int
+@export var move_speed: int
+@export var unit_type: UnitTypes
 	
 var own_group: Group
-var unit_type: UnitTypes
 var area_occupied: bool = false
 
 func _ready() -> void:

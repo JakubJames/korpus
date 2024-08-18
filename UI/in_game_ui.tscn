@@ -45,9 +45,6 @@ offset_right = 1205.0
 offset_bottom = 660.0
 text = "START BATTLE"
 
-[connection signal="update_global_vars" from="." to="UnitsInventoryContainer/HBoxContainer/SimpleUnitButton" method="_on_in_game_ui_update_global_vars"]
-[connection signal="update_global_vars" from="." to="UnitsInventoryContainer/HBoxContainer/ArcheryUnitButton" method="_on_in_game_ui_update_global_vars"]
-[connection signal="update_global_vars" from="." to="UnitsInventoryContainer/HBoxContainer/BigUnitButton" method="_on_in_game_ui_update_global_vars"]
 [connection signal="pressed" from="UnitsInventoryContainer/HBoxContainer/SimpleUnitButton" to="." method="_on_simple_unit_button_pressed"]
 [connection signal="pressed" from="UnitsInventoryContainer/HBoxContainer/ArcheryUnitButton" to="." method="_on_archery_unit_button_pressed"]
 [connection signal="pressed" from="UnitsInventoryContainer/HBoxContainer/BigUnitButton" to="." method="_on_big_unit_button_pressed"]

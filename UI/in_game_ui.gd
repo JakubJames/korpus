@@ -1,7 +1,7 @@
 extends CanvasLayer
+class_name InGameUI
 
 signal start_battle
-signal update_global_vars
 
 @export var korpus: Group
 @export var enemies: Group
@@ -11,7 +11,6 @@ var hold_unit: Unit
 var spawned_unit: Unit
 var mouse_inside_spawn: bool = false
 var battle_started: bool = false
-var warning_dialogue_used = false
 
 
 func _process(_delta: float) -> void:
@@ -39,15 +38,16 @@ func _on_button_pressed() -> void:
 				hold_unit = null
 
 			if korpus.units_list.size() >= 10:
-				if  warning_dialogue_used:
+				if  GlobalVars.first_dialogue_used and !GlobalVars.second_dialogue_used:
 					DialogueManager.show_example_dialogue_balloon(
 						load("res://Dialogue/main.dialogue"), "disaster"
 					)
-				if !warning_dialogue_used:
+					GlobalVars.second_dialogue_used=true
+				if !GlobalVars.first_dialogue_used:
 					DialogueManager.show_example_dialogue_balloon(
 						load("res://Dialogue/main.dialogue"), "warning_for_the_player"
 					)
-					warning_dialogue_used = true
+					GlobalVars.first_dialogue_used = true
 
 			# connect start_battle signal to all units
 			for unit in korpus.units_list:
@@ -105,4 +105,19 @@ func spawn_unit() -> void:
 		korpus.units_list.append(spawned_unit)
 		korpus.add_child(spawned_unit)
 		spawned_unit.global_position = get_viewport().get_camera_2d().get_global_mouse_position()
-	
+
+
+func get_current_number_of_units(unit_type: Unit.UnitTypes) -> int:
+	if unit_type == Unit.UnitTypes.SIMPLE:
+		return $UnitsInventoryContainer/HBoxContainer/SimpleUnitButton.number_of_units
+	elif unit_type == Unit.UnitTypes.ARCHER:
+		return $UnitsInventoryContainer/HBoxContainer/ArcheryUnitButton.number_of_units
+	elif unit_type == Unit.UnitTypes.BIG:
+		return $UnitsInventoryContainer/HBoxContainer/BigUnitButton.number_of_units
+	else:
+		push_error('wrong unit type')
+		return -1
+
+
+func hide_start_button() -> void:
+	$Button.visible = false;
