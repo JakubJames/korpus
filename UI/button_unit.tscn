@@ -5,7 +5,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h62oi"]
 atlas = ExtResource("1_e1bfp")
-region = Rect2(402, 17, 13, 14)
+region = Rect2(497, 97, 14, 14)
 
 [node name="SimpleUnitButton" type="Button"]
 offset_right = 8.0

@@ -1,0 +1,19 @@
+~ beginning
+
+G: Build a proper [b]korpus[/b] for this threat.
+
+=> END
+
+~ warning_for_the_player
+
+G: Do you think you are building a deck of cards or what? 
+G: Scale up your [b]korpus[/b], more thoughtfully.
+
+=> END
+
+~ disaster
+
+G: No.
+G: Not like [b]that[/b].
+
+=> END

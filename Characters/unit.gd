@@ -5,6 +5,8 @@ enum UnitTypes {SIMPLE, ARCHER, BIG}
 
 @export var target_group: Group
 @export var hp: int = 20
+@export var damage_factor: int = 10
+@export var move_speed: int = 20
 	
 var own_group: Group
 var unit_type: UnitTypes

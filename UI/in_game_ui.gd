@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal start_battle
+signal update_global_vars
 
 @export var korpus: Group
 @export var enemies: Group
@@ -10,6 +11,7 @@ var hold_unit: Unit
 var spawned_unit: Unit
 var mouse_inside_spawn: bool = false
 var battle_started: bool = false
+var warning_dialogue_used = false
 
 
 func _process(_delta: float) -> void:
@@ -35,6 +37,18 @@ func _on_button_pressed() -> void:
 			if hold_unit:
 				korpus.remove_child(hold_unit)
 				hold_unit = null
+
+			if korpus.units_list.size() >= 10:
+				if  warning_dialogue_used:
+					DialogueManager.show_example_dialogue_balloon(
+						load("res://Dialogue/main.dialogue"), "disaster"
+					)
+				if !warning_dialogue_used:
+					DialogueManager.show_example_dialogue_balloon(
+						load("res://Dialogue/main.dialogue"), "warning_for_the_player"
+					)
+					warning_dialogue_used = true
+
 			# connect start_battle signal to all units
 			for unit in korpus.units_list:
 				connect("start_battle", unit._on_units_inventory_start_battle)
@@ -60,7 +74,10 @@ func _on_archery_unit_button_pressed() -> void:
 
 
 func _on_big_unit_button_pressed() -> void:
-	print("big placeholder")
+	hold_unit = preload("res://Characters/big_unit.tscn").instantiate()
+	korpus.add_child(hold_unit)
+	hold_unit.get_node("CollisionShape2D").disabled = true
+	hold_unit.unit_type = Unit.UnitTypes.BIG
 
 
 func _on_spawn_area_mouse_entered() -> void:
@@ -72,10 +89,14 @@ func _on_spawn_area_mouse_exited() -> void:
 
 func spawn_unit() -> void:
 	spawned_unit = null
-	if 	hold_unit.unit_type == Unit.UnitTypes.SIMPLE:
+	if hold_unit.unit_type == Unit.UnitTypes.SIMPLE:
 		if $UnitsInventoryContainer/HBoxContainer/SimpleUnitButton.enough_quantity():
 			spawned_unit = preload("res://Characters/unit.tscn").instantiate()
-			$UnitsInventoryContainer/HBoxContainer/SimpleUnitButton.decrease_number_of_units()			
+			$UnitsInventoryContainer/HBoxContainer/SimpleUnitButton.decrease_number_of_units()
+	elif hold_unit.unit_type == Unit.UnitTypes.BIG:
+		if $UnitsInventoryContainer/HBoxContainer/BigUnitButton.enough_quantity():
+			spawned_unit = preload("res://Characters/big_unit.tscn").instantiate()
+			$UnitsInventoryContainer/HBoxContainer/BigUnitButton.decrease_number_of_units()
 	else:
 		push_error("Wrong unit type: " + hold_unit.get_class())
 		
