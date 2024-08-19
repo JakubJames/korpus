@@ -124,7 +124,7 @@ visible = false
 korpus = NodePath("../Korpus")
 enemies = NodePath("../Enemies")
 in_game_ui = NodePath("../InGameUI")
-next_level_name = "levelboss"
+next_level_name = "level_boss"
 
 [node name="DisasterCountdown" type="Timer" parent="." node_paths=PackedStringArray("korpus", "enemies")]
 wait_time = 5.0
@@ -147,6 +147,7 @@ autoplay = true
 
 [connection signal="mouse_entered" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_entered"]
 [connection signal="mouse_exited" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_exited"]
+[connection signal="start_battle" from="InGameUI" to="DisasterCountdown" method="_on_in_game_ui_start_battle"]
 [connection signal="timeout" from="DisasterCountdown" to="DisasterCountdown" method="_on_timeout"]
 [connection signal="timeout" from="DisasterCountdown/BurningInterval" to="DisasterCountdown" method="_on_burning_interval_timeout"]
 [connection signal="timeout" from="DisasterCountdown/Suspense" to="DisasterCountdown" method="_on_suspense_timeout"]

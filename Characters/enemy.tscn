@@ -51,6 +51,7 @@ script = ExtResource("6_adv2k")
 one_shot = true
 
 [node name="FireEffect" parent="." instance=ExtResource("7_igr82")]
+visible = false
 position = Vector2(0, 2)
 
 [connection signal="timeout" from="AttackCooldown" to="StateMachine/UnitAttack" method="_on_attack_cooldown_timeout"]

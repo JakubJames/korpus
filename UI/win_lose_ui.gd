@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal battle_ended
+
 @export var korpus: Group
 @export var enemies: Group
 @export var in_game_ui: InGameUI
@@ -9,6 +11,8 @@ var already_informed = false
 var simple_units_num_on_map: int
 var archer_units_num_on_map: int
 var big_units_num_on_map: int
+var we_are_doomed: = false
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -18,7 +22,8 @@ func _process(_delta: float) -> void:
 		if enemies.units_list.is_empty():
 			# WIN
 			already_informed = true
-			$RichTextLabel.append_text('[center][font_size={30}]YOU WIN[/font_size][/center]')
+			$RichTextLabel.text = "[center][font_size={30}]YOU WIN[/font_size][/center]"
+			battle_ended.emit()
 			
 			for unit_on_map in korpus.units_list:
 				if unit_on_map.unit_type == Unit.UnitTypes.SIMPLE:
@@ -35,7 +40,7 @@ func _process(_delta: float) -> void:
 		if korpus.units_list.is_empty():
 			# LOSE
 			already_informed = true
-			$RichTextLabel.append_text('[center][font_size={30}]YOU LOSE[/font_size][/center]')
+			$RichTextLabel.text = "[center][font_size={30}]YOU LOSE[/font_size][/center]"
 			simple_units_num_on_map	= 0
 			archer_units_num_on_map	= 0
 			big_units_num_on_map	= 0
@@ -52,7 +57,18 @@ func update_global_vars() -> void:
 	GlobalVars.simple_unit_num 	= in_game_ui.get_current_number_of_units(Unit.UnitTypes.SIMPLE) + simple_units_num_on_map
 	GlobalVars.archery_unit_num = in_game_ui.get_current_number_of_units(Unit.UnitTypes.ARCHER) + archer_units_num_on_map
 	GlobalVars.big_unit_num 	= in_game_ui.get_current_number_of_units(Unit.UnitTypes.BIG) + big_units_num_on_map
+	
+	if GlobalVars.simple_unit_num == 0 and GlobalVars.big_unit_num == 0 or GlobalVars.archery_unit_num == 0:
+		$RichTextLabel.text = "[center][font_size={30}][color=red]We are doomed.[/color][/font_size][/center]"
+		we_are_doomed = true
+		$NextLevelButton.text = "Restart"
+		$NextLevelButton.visible = true
+		in_game_ui.visible = false
 
 
 func _on_next_level_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/" + next_level_name + ".tscn")
+	if we_are_doomed:
+		GlobalVars.reset_to_default()
+		get_tree().change_scene_to_file("res://Scenes/level1.tscn")
+	else:
+		get_tree().change_scene_to_file("res://Scenes/" + next_level_name + ".tscn")

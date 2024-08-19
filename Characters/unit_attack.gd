@@ -20,7 +20,7 @@ func enter():
 	elif unit.unit_type == Unit.UnitTypes.BIG:
 		attack_radius = 30
 	elif unit.unit_type == Unit.UnitTypes.GOD:
-		attack_radius = 150
+		attack_radius = 100
 
 
 func physics_update(_delta: float):

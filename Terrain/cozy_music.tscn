@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://clmbkc8ycm3js"]
+
+[ext_resource type="AudioStream" uid="uid://bmqcup2nye17" path="res://External/Sounds/171394__setuniman__cozy-0x38m.mp3" id="1_rg0qw"]
+
+[node name="CozyMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_rg0qw")
