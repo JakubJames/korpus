@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=4 uid="uid://dgqcnunbopv4n"]
+[gd_scene load_steps=17 format=4 uid="uid://dgqcnunbopv4n"]
 
 [ext_resource type="TileSet" uid="uid://cnxvmlfdc2sot" path="res://Terrain/main_tile_set.tres" id="1_40jce"]
+[ext_resource type="Texture2D" uid="uid://clkmapkpne5s0" path="res://Terrain/back_background.png" id="1_rsrpp"]
 [ext_resource type="Shader" path="res://Terrain/spawn_area.gdshader" id="2_gtg6f"]
 [ext_resource type="Texture2D" uid="uid://kpr3qpyrb52p" path="res://Terrain/spawn_orb.png" id="3_mii6t"]
 [ext_resource type="PackedScene" uid="uid://cdwwulhmnc4im" path="res://Group/group.tscn" id="4_ujdpe"]
@@ -11,6 +12,8 @@
 [ext_resource type="Script" path="res://Scenes/disaster_countdown.gd" id="9_v7ncn"]
 [ext_resource type="AudioStream" uid="uid://dakfl6sj0ag2g" path="res://External/Sounds/suonho_scaryscape_01.wav" id="10_w71ph"]
 [ext_resource type="AudioStream" uid="uid://cxn6qrrd2plju" path="res://External/Sounds/cave.wav" id="11_fvtmy"]
+[ext_resource type="PackedScene" uid="uid://bmgk3aaq50d6s" path="res://Terrain/light_module.tscn" id="13_e207g"]
+[ext_resource type="Texture2D" uid="uid://dqub5iluydhdr" path="res://Terrain/light_orb.png" id="14_727dm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65o37"]
 radius = 72.0
@@ -24,6 +27,11 @@ shader_parameter/highlight_speed = 6.0
 shader_parameter/highlight_width = 15.0
 
 [node name="Level3" type="Node2D"]
+
+[node name="BackBackground" type="Sprite2D" parent="."]
+position = Vector2(50, -82)
+scale = Vector2(150, 150)
+texture = ExtResource("1_rsrpp")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(49, -60)
@@ -144,6 +152,18 @@ stream = ExtResource("10_w71ph")
 [node name="CaveSounds" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_fvtmy")
 autoplay = true
+
+[node name="LightModule" parent="." instance=ExtResource("13_e207g")]
+position = Vector2(171.56, -150.545)
+
+[node name="Shadow2" type="PointLight2D" parent="LightModule"]
+position = Vector2(-342.56, 182.545)
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+texture = ExtResource("14_727dm")
+texture_scale = 3.0
 
 [connection signal="mouse_entered" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_entered"]
 [connection signal="mouse_exited" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_exited"]

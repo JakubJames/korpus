@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwcaj1r1rxslj"]
+[gd_scene load_steps=11 format=3 uid="uid://cwcaj1r1rxslj"]
 
 [ext_resource type="Script" path="res://Characters/unit.gd" id="1_4hkrl"]
 [ext_resource type="Texture2D" uid="uid://dwyqustvr28n4" path="res://External/kenney_1-bit-pack/colored-transparent_packed.png" id="2_4btmh"]
@@ -14,6 +14,12 @@ region = Rect2(466, 33, 12, 14)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_im2d4"]
 radius = 9.0
 height = 42.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_crm5q"]
+blend_mode = 1
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jyfxo"]
+polygon = PackedVector2Array(-18, -12, -15, -12, -15, -15, -9, -15, -9, -18, -6, -18, -6, -21, 6, -21, 6, -18, 9, -18, 9, -15, 15, -15, 18, -12, 18, -6, 15, -6, 15, -9, 9, -9, 9, -3, 12, -3, 12, 0, 15, 0, 15, 3, 18, 3, 18, 18, 12, 18, 12, 3, 9, 3, 9, 21, 3, 21, 3, 12, -3, 12, -3, 21, -9, 21, -9, 3, -12, 3, -12, 18, -18, 18, -18, 3, -15, 3, -15, 0, -12, 0, -12, -3, -9, -3, -9, -9, -15, -9, -15, -6, -18, -6)
 
 [node name="God" type="CharacterBody2D"]
 collision_mask = 7
@@ -48,5 +54,9 @@ script = ExtResource("6_la4u7")
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+material = SubResource("CanvasItemMaterial_crm5q")
+occluder = SubResource("OccluderPolygon2D_jyfxo")
 
 [connection signal="timeout" from="AttackCooldown" to="StateMachine/UnitAttack" method="_on_attack_cooldown_timeout"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmgk3aaq50d6s"]
+
+[ext_resource type="Texture2D" uid="uid://dqub5iluydhdr" path="res://Terrain/light_orb.png" id="1_gkht2"]
+
+[sub_resource type="Gradient" id="Gradient_wfrcb"]
+offsets = PackedFloat32Array(0, 0.4, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.337778, 0.337778, 0.337778, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xn5gk"]
+gradient = SubResource("Gradient_wfrcb")
+
+[sub_resource type="Environment" id="Environment_d0h4b"]
+background_mode = 3
+tonemap_mode = 3
+tonemap_white = 4.5
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture2D_xn5gk")
+
+[node name="LightModule" type="CanvasModulate"]
+color = Color(0.244776, 0.244776, 0.244776, 1)
+
+[node name="LightCombo" type="Node" parent="."]
+
+[node name="Texture" type="PointLight2D" parent="LightCombo"]
+energy = 0.5
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+texture = ExtResource("1_gkht2")
+texture_scale = 5.0
+
+[node name="Shadow" type="PointLight2D" parent="LightCombo"]
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+texture = ExtResource("1_gkht2")
+texture_scale = 3.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d0h4b")

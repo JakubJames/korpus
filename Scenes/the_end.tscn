@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=4 uid="uid://do2kakba3qnyf"]
+[gd_scene load_steps=3 format=4 uid="uid://do2kakba3qnyf"]
 
 [ext_resource type="TileSet" uid="uid://cnxvmlfdc2sot" path="res://Terrain/main_tile_set.tres" id="1_jtxmy"]
+[ext_resource type="Script" path="res://Scenes/the_end.gd" id="1_ry3wi"]
 
 [node name="TheEnd" type="CanvasLayer"]
+script = ExtResource("1_ry3wi")
 
 [node name="Background" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)

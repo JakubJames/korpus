@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=4 uid="uid://bth057km3bul6"]
+[gd_scene load_steps=13 format=4 uid="uid://bth057km3bul6"]
 
 [ext_resource type="TileSet" uid="uid://cnxvmlfdc2sot" path="res://Terrain/main_tile_set.tres" id="1_6kxl1"]
+[ext_resource type="Texture2D" uid="uid://clkmapkpne5s0" path="res://Terrain/back_background.png" id="1_ld82o"]
 [ext_resource type="Shader" path="res://Terrain/spawn_area.gdshader" id="2_1lp44"]
 [ext_resource type="Texture2D" uid="uid://kpr3qpyrb52p" path="res://Terrain/spawn_orb.png" id="3_swv82"]
 [ext_resource type="PackedScene" uid="uid://cdwwulhmnc4im" path="res://Group/group.tscn" id="4_wiryq"]
@@ -8,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://4n5wc8o887ei" path="res://UI/in_game_ui.tscn" id="6_lsuo3"]
 [ext_resource type="PackedScene" uid="uid://udufj0ob006w" path="res://UI/win_lose_ui.tscn" id="7_nqcqp"]
 [ext_resource type="AudioStream" uid="uid://cxn6qrrd2plju" path="res://External/Sounds/cave.wav" id="8_re2rh"]
+[ext_resource type="PackedScene" uid="uid://bmgk3aaq50d6s" path="res://Terrain/light_module.tscn" id="10_o10n5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dit4q"]
 radius = 21.575
@@ -21,6 +23,12 @@ shader_parameter/highlight_speed = 6.0
 shader_parameter/highlight_width = 15.0
 
 [node name="Level2" type="Node2D"]
+
+[node name="BackBackground" type="Sprite2D" parent="."]
+light_mask = 2
+position = Vector2(56, -33)
+scale = Vector2(150, 150)
+texture = ExtResource("1_ld82o")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
@@ -68,6 +76,9 @@ next_level_name = "level3"
 [node name="CaveSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_re2rh")
 autoplay = true
+
+[node name="LightModule" parent="." instance=ExtResource("10_o10n5")]
+position = Vector2(68, -97)
 
 [connection signal="mouse_entered" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_entered"]
 [connection signal="mouse_exited" from="SpawnArea" to="InGameUI" method="_on_spawn_area_mouse_exited"]
