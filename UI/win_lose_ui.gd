@@ -58,7 +58,7 @@ func update_global_vars() -> void:
 	GlobalVars.archery_unit_num = in_game_ui.get_current_number_of_units(Unit.UnitTypes.ARCHER) + archer_units_num_on_map
 	GlobalVars.big_unit_num 	= in_game_ui.get_current_number_of_units(Unit.UnitTypes.BIG) + big_units_num_on_map
 	
-	if GlobalVars.simple_unit_num == 0 and GlobalVars.big_unit_num == 0 or GlobalVars.archery_unit_num == 0:
+	if GlobalVars.simple_unit_num == 0 and GlobalVars.big_unit_num == 0 and GlobalVars.archery_unit_num == 0:
 		$RichTextLabel.text = "[center][font_size={30}][color=red]We are doomed.[/color][/font_size][/center]"
 		we_are_doomed = true
 		$NextLevelButton.text = "Restart"

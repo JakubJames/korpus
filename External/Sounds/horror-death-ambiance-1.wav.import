@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/horror-death-ambiance-1.wav-89c65162d46be923f
 
 [params]
 
-force/8_bit=false
+force/8_bit=true
 force/mono=false
 force/max_rate=false
 force/max_rate_hz=44100
