@@ -3,12 +3,12 @@
 You can play it here: https://jakubjames.itch.io/korpus
 
 ## Licence credits:
-https://freesound.org/people/suonho/sounds/9695/ - Attribution 4.0
-https://opengameart.org/content/700-noise-textures - CC0 1.0 Universal
-https://godotengine.org/asset-library/asset/1207 - MIT
-https://freesound.org/people/Setuniman/sounds/171394/ - Attribution NonCommercial 4.0
-https://freesound.org/people/jobro/sounds/74833/ - Attribution 3.0
-https://freesound.org/people/Hybrid_V/sounds/319590/ - Attribution 4.0
+https://freesound.org/people/suonho/sounds/9695/ - Attribution 4.0 
+https://opengameart.org/content/700-noise-textures - CC0 1.0 Universal 
+https://godotengine.org/asset-library/asset/1207 - MIT 
+https://freesound.org/people/Setuniman/sounds/171394/ - Attribution NonCommercial 4.0 
+https://freesound.org/people/jobro/sounds/74833/ - Attribution 3.0 
+https://freesound.org/people/Hybrid_V/sounds/319590/ - Attribution 4.0 
  
 ## License
 
