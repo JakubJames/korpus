@@ -2,6 +2,7 @@ extends State
 class_name UnitAttack
 
 @export var unit: Unit
+@export var attack_sound: AudioStreamPlayer
 
 var target_units_list: Array
 var local_target: Unit
@@ -43,8 +44,8 @@ func physics_update(_delta: float):
 			@warning_ignore("integer_division")
 			var damage: int = randi_range(unit.damage_factor/10, unit.damage_factor)
 			local_target.get_hit(damage)
+			attack_sound.play()
 			print(unit.name + ' do damage ' + str(damage))
-			#print(str(unit.name) + " gives " + str(damage) + "damage to " + str(local_target.name))
 
 
 func _on_attack_cooldown_timeout() -> void:

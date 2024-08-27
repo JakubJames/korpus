@@ -16,6 +16,12 @@ var dialogues: DialogueResource = load("res://Dialogue/main.dialogue")
 
 
 func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("fullscreen"):
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	
 	if hold_unit:	
 		hold_unit.global_position = get_viewport().get_camera_2d().get_global_mouse_position()
 		
@@ -53,6 +59,7 @@ func _on_button_pressed() -> void:
 			for enemy in enemies.units_list:
 				connect("start_battle", enemy._on_units_inventory_start_battle)
 		
+			$SwordsPulled.play()
 			start_battle.emit()
 			$UnitsInventoryContainer.hide()
 			$Button.text = 'STOP BATTLE'

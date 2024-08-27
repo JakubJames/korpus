@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwcaj1r1rxslj"]
+[gd_scene load_steps=10 format=3 uid="uid://cwcaj1r1rxslj"]
 
 [ext_resource type="Script" path="res://Characters/unit.gd" id="1_4hkrl"]
 [ext_resource type="Texture2D" uid="uid://dwyqustvr28n4" path="res://External/kenney_1-bit-pack/colored-transparent_packed.png" id="2_4btmh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Characters/unit_attack.gd" id="4_qwvli"]
 [ext_resource type="Script" path="res://Characters/unit_idle.gd" id="5_10r7y"]
 [ext_resource type="Script" path="res://Characters/unit_freeze.gd" id="6_la4u7"]
+[ext_resource type="AudioStream" uid="uid://5to01o5vpbf5" path="res://External/Sounds/319590__hybrid_v__shield-bash-impact.wav" id="7_1xnca"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lsqis"]
 atlas = ExtResource("2_4btmh")
@@ -35,9 +36,10 @@ shape = SubResource("CapsuleShape2D_im2d4")
 script = ExtResource("3_o7hu6")
 initial_state = NodePath("UnitFreeze")
 
-[node name="UnitAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit")]
+[node name="UnitAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit", "attack_sound")]
 script = ExtResource("4_qwvli")
 unit = NodePath("../..")
+attack_sound = NodePath("../../Hammer")
 
 [node name="UnitIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit")]
 script = ExtResource("5_10r7y")
@@ -48,5 +50,8 @@ script = ExtResource("6_la4u7")
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="Hammer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1xnca")
 
 [connection signal="timeout" from="AttackCooldown" to="StateMachine/UnitAttack" method="_on_attack_cooldown_timeout"]

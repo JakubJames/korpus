@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b153lf8y667bb"]
+[gd_scene load_steps=12 format=3 uid="uid://b153lf8y667bb"]
 
 [ext_resource type="Script" path="res://Characters/unit.gd" id="1_ahta4"]
 [ext_resource type="Texture2D" uid="uid://dwyqustvr28n4" path="res://External/kenney_1-bit-pack/colored-transparent_packed.png" id="2_5pqlr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Characters/unit_idle.gd" id="5_a1e6q"]
 [ext_resource type="Script" path="res://Characters/unit_freeze.gd" id="6_nqjtp"]
 [ext_resource type="PackedScene" uid="uid://c1b2gdhh53yjy" path="res://Shaders/fire_effect.tscn" id="7_m6twl"]
+[ext_resource type="AudioStream" uid="uid://41mqnvfgdxm2" path="res://External/Sounds/52458__audione__sword-01.wav" id="8_axxpx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lsqis"]
 atlas = ExtResource("2_5pqlr")
@@ -40,9 +41,10 @@ shape = SubResource("CapsuleShape2D_im2d4")
 script = ExtResource("3_iv6q2")
 initial_state = NodePath("UnitFreeze")
 
-[node name="UnitAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit")]
+[node name="UnitAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit", "attack_sound")]
 script = ExtResource("4_jmdrw")
 unit = NodePath("../..")
+attack_sound = NodePath("../../BigSword")
 
 [node name="UnitIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit")]
 script = ExtResource("5_a1e6q")
@@ -63,6 +65,9 @@ shape = SubResource("CircleShape2D_byt0y")
 visible = false
 position = Vector2(0, 1)
 scale = Vector2(2, 2)
+
+[node name="BigSword" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_axxpx")
 
 [connection signal="timeout" from="AttackCooldown" to="StateMachine/UnitAttack" method="_on_attack_cooldown_timeout"]
 [connection signal="body_entered" from="CheckOccupation" to="." method="_on_check_occupation_body_entered"]
