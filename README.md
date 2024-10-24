@@ -3,7 +3,7 @@
 You can play it here: https://jakubjames.itch.io/korpus
 
 ## Licence credits:
-Game made in Godot - https://godotengine.org/license/
+Game made in Godot - https://godotengine.org/license/ <br />
 https://freesound.org/people/suonho/sounds/9695/ - Attribution 4.0 <br />
 https://opengameart.org/content/700-noise-textures - CC0 1.0 Universal <br />
 https://godotengine.org/asset-library/asset/1207 - MIT <br />
